@@ -179,6 +179,7 @@ workflow-assistant-rag/
    ```
    http://127.0.0.1:5000/
    ```
+<img width="1740" height="1771" alt="image" src="https://github.com/user-attachments/assets/d69ee0ba-325a-4b08-ace8-e9ab2acbbd86" />
 
 3. **Enter your request:**
    - Type: "Send email notification when task duration exceeds 2 hours"
