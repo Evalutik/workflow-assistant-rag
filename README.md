@@ -331,7 +331,7 @@ workflow-assistant-rag/
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ USER INPUT                                                   │
+│ USER INPUT                                                  │
 │ "Send email when task duration > 2 hours"                   │
 └────────────────┬────────────────────────────────────────────┘
                  │
@@ -345,30 +345,30 @@ workflow-assistant-rag/
                  │
                  ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ PROMPT BUILDER (prompt_builder.py)                         │
-│ • Combines: Schema + Retrieved examples + User query       │
-│ • Formats structured prompt for LLM                        │
+│ PROMPT BUILDER (prompt_builder.py)                          │
+│ • Combines: Schema + Retrieved examples + User query        │
+│ • Formats structured prompt for LLM                         │
 └────────────────┬────────────────────────────────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ LLM CLIENT (llm_client.py)                                 │
-│ • Calls OpenAI API (if key available)                      │
-│ • Returns offline placeholder (if no key)                  │
-│ • Parses JSON from response                                │
+│ LLM CLIENT (llm_client.py)                                  │
+│ • Calls OpenAI API (if key available)                       │
+│ • Returns offline placeholder (if no key)                   │
+│ • Parses JSON from response                                 │
 └────────────────┬────────────────────────────────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ VALIDATOR (validate.py)                                     │
-│ • Validates JSON against schema (data/schema.json)         │
-│ • Computes coverage metric (% required fields)             │
-│ • Returns errors or success status                         │
+│ • Validates JSON against schema (data/schema.json)          │
+│ • Computes coverage metric (% required fields)              │
+│ • Returns errors or success status                          │
 └────────────────┬────────────────────────────────────────────┘
                  │
                  ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ OUTPUT                                                       │
+│ OUTPUT                                                      │
 │ Valid JSON workflow configuration ready to use              │
 └─────────────────────────────────────────────────────────────┘
 ```
