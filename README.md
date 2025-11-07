@@ -527,30 +527,19 @@ else:
 
 ## Production Deployment Considerations
 
-This is a **prototype/proof-of-concept**. For production use:
-
-### Recommended Upgrades
+For production:
 
 **1. Retrieval System:**
-- Replace TF-IDF with vector embeddings (OpenAI, Cohere, Sentence-BERT)
 - Use vector database (Pinecone, Weaviate, ChromaDB)
-- Implement hybrid search (keyword + semantic)
-- Add caching for frequent queries
 
 **2. LLM Integration:**
-- Add support for multiple providers (Anthropic, Azure OpenAI, local models)
-- Implement retry logic with exponential backoff
 - Add rate limiting and request queuing
-- Enable streaming responses for better UX
 - Monitor token usage and costs
 
 **3. Validation:**
-- Add business logic validators beyond JSON Schema
-- Implement cross-field validation rules
 - Create custom error messages for your domain
-- Add workflow simulation/dry-run capability
 
-**4. Production Features:**
+**4. Features:**
 - User authentication and authorization
 - Usage analytics and logging
 - A/B testing for prompt variations
@@ -561,7 +550,6 @@ This is a **prototype/proof-of-concept**. For production use:
 **5. Infrastructure:**
 - Containerization (Docker)
 - Horizontal scaling
-- Load balancing
 - Monitoring and alerting
 - Database for storing generated configs
 
