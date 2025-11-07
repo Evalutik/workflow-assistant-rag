@@ -566,7 +566,7 @@ This is a **prototype/proof-of-concept**. For production use:
 
 ## Contributing
 
-This is a demonstration project showing RAG concepts. Feel free to:
+Feel free to:
 - Fork and adapt for your specific use case
 - Add more sophisticated retrieval methods
 - Integrate with other LLM providers
