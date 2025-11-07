@@ -1,7 +1,7 @@
-flask
-scikit-learn
-pandas
-numpy
-jsonschema
-requests
-python-dotenv
+flask>=2.3.0
+scikit-learn>=1.3.0
+pandas>=2.0.0
+numpy>=1.24.0
+jsonschema>=4.17.0
+requests>=2.31.0
+python-dotenv>=1.0.0

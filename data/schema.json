@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/workflow-node.schema.json",
+  "title": "Workflow Node Configuration",
+  "description": "Schema for a workflow automation node configuration",
+  "type": "object",
+  "properties": {
+    "nodeType": {
+      "type": "string",
+      "description": "The type of workflow node",
+      "examples": ["notification", "escalation", "routing", "retry", "alert", "scheduled_task"]
+    },
+    "conditions": {
+      "type": "array",
+      "description": "Array of conditions that trigger this workflow node",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "The field name to evaluate"
+          },
+          "op": {
+            "type": "string",
+            "description": "The comparison operator",
+            "enum": ["==", "!=", ">", "<", ">=", "<=", "in", "not_in", "contains"]
+          },
+          "value": {
+            "description": "The value to compare against (can be string, number, boolean, or array)",
+            "oneOf": [
+              { "type": "string" },
+              { "type": "number" },
+              { "type": "boolean" },
+              { "type": "array" }
+            ]
+          }
+        },
+        "required": ["field", "op", "value"]
+      },
+      "minItems": 1
+    },
+    "actions": {
+      "type": "array",
+      "description": "Array of actions to execute when conditions are met",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of action to perform",
+            "examples": ["email", "sms", "slack", "assign", "retry", "log", "webhook", "generate_report", "pagerduty"]
+          },
+          "params": {
+            "type": "object",
+            "description": "Parameters specific to the action type",
+            "additionalProperties": true
+          }
+        },
+        "required": ["type", "params"]
+      },
+      "minItems": 1
+    },
+    "priority": {
+      "type": "string",
+      "description": "Priority level for this workflow node",
+      "enum": ["low", "medium", "high", "critical"],
+      "default": "medium"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Whether this workflow node is active",
+      "default": true
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata for the workflow node",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "created_by": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "required": ["nodeType", "conditions", "actions"],
+  "additionalProperties": false
+}

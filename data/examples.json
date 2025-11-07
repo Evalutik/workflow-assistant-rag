@@ -1,0 +1,210 @@
+[
+  {
+    "id": "ex-001",
+    "title": "Email notification on task delay",
+    "description": "Send email alert when task duration exceeds 2 hours",
+    "config": {
+      "nodeType": "notification",
+      "conditions": [
+        {
+          "field": "duration",
+          "op": ">",
+          "value": 7200
+        }
+      ],
+      "actions": [
+        {
+          "type": "email",
+          "params": {
+            "recipients": ["team-lead@company.com", "project-manager@company.com"],
+            "subject": "Task Duration Alert",
+            "template": "task_delay_notification"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "ex-002",
+    "title": "Escalate negative feedback to manager",
+    "description": "Escalate case to manager when customer satisfaction score is low",
+    "config": {
+      "nodeType": "escalation",
+      "conditions": [
+        {
+          "field": "satisfaction_score",
+          "op": "<",
+          "value": 3
+        },
+        {
+          "field": "status",
+          "op": "==",
+          "value": "completed"
+        }
+      ],
+      "actions": [
+        {
+          "type": "assign",
+          "params": {
+            "assignee": "manager",
+            "priority": "high",
+            "reason": "Low satisfaction score requires review"
+          }
+        },
+        {
+          "type": "slack",
+          "params": {
+            "channel": "#escalations",
+            "message": "Case escalated due to low satisfaction"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "ex-003",
+    "title": "Assign complex tasks to senior technician",
+    "description": "Route high complexity issues to senior technical staff automatically",
+    "config": {
+      "nodeType": "routing",
+      "conditions": [
+        {
+          "field": "complexity",
+          "op": ">=",
+          "value": 8
+        },
+        {
+          "field": "category",
+          "op": "in",
+          "value": ["technical", "engineering", "architecture"]
+        }
+      ],
+      "actions": [
+        {
+          "type": "assign",
+          "params": {
+            "team": "senior_tech",
+            "priority": "high",
+            "auto_notify": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "ex-004",
+    "title": "Auto-retry failed API calls",
+    "description": "Automatically retry failed API requests up to 3 times with exponential backoff",
+    "config": {
+      "nodeType": "retry",
+      "conditions": [
+        {
+          "field": "status",
+          "op": "==",
+          "value": "failed"
+        },
+        {
+          "field": "error_type",
+          "op": "==",
+          "value": "network_timeout"
+        },
+        {
+          "field": "retry_count",
+          "op": "<",
+          "value": 3
+        }
+      ],
+      "actions": [
+        {
+          "type": "retry",
+          "params": {
+            "max_attempts": 3,
+            "backoff_strategy": "exponential",
+            "initial_delay": 1000
+          }
+        },
+        {
+          "type": "log",
+          "params": {
+            "level": "warning",
+            "message": "Retrying failed API call"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "ex-005",
+    "title": "SMS alert for critical system events",
+    "description": "Send SMS to on-call engineer when critical alerts are triggered",
+    "config": {
+      "nodeType": "alert",
+      "conditions": [
+        {
+          "field": "severity",
+          "op": "==",
+          "value": "critical"
+        },
+        {
+          "field": "component",
+          "op": "in",
+          "value": ["database", "payment_gateway", "auth_service"]
+        }
+      ],
+      "actions": [
+        {
+          "type": "sms",
+          "params": {
+            "recipients": ["+1-555-0100"],
+            "message": "CRITICAL: System alert triggered"
+          }
+        },
+        {
+          "type": "pagerduty",
+          "params": {
+            "incident_key": "critical_system_alert",
+            "urgency": "high"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "ex-006",
+    "title": "Generate weekly performance report",
+    "description": "Automatically generate and email performance reports every Friday",
+    "config": {
+      "nodeType": "scheduled_task",
+      "conditions": [
+        {
+          "field": "day_of_week",
+          "op": "==",
+          "value": "friday"
+        },
+        {
+          "field": "hour",
+          "op": "==",
+          "value": 17
+        }
+      ],
+      "actions": [
+        {
+          "type": "generate_report",
+          "params": {
+            "report_type": "weekly_performance",
+            "date_range": "last_7_days",
+            "format": "pdf"
+          }
+        },
+        {
+          "type": "email",
+          "params": {
+            "recipients": ["executives@company.com", "department-heads@company.com"],
+            "subject": "Weekly Performance Report",
+            "attach_report": true
+          }
+        }
+      ]
+    }
+  }
+]
